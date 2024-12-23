@@ -11,7 +11,7 @@ export function Form({
 }) {
   return (
     <div>
-      <form action="#" method="POST" className="space-y-6">
+      <form className="space-y-6">
         <div>
           <label
             htmlFor="sequence_one"

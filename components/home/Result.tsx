@@ -56,7 +56,7 @@ export function Result({
       </div>
 
       <div className="mt-6 grid grid-cols-2 gap-4">
-        {alignment && seq1.length > 0 && seq2.length > 0 && (
+        {alignment && seq1.length > 0 && seq2.length > 0 ? (
           <div style={{ marginTop: "2px" }}>
             <h2 className="py-4 text-sm font-light tracking-wider uppercase">
               Aligned Sequences
@@ -66,6 +66,18 @@ export function Result({
             </div>
             <div className="font-mono text-sm tracking-widest whitespace-nowrap">
               {highlightAlignment(alignment.alignedSeq2, alignment.alignedSeq1)}
+            </div>
+          </div>
+        ) : (
+          <div style={{ marginTop: "2px" }}>
+            <h2 className="py-4 text-sm font-light tracking-wider uppercase text-gray-400">
+              Aligned Sequences
+            </h2>
+            <div className="font-mono text-sm tracking-widest whitespace-nowrap invisible">
+              Hlelo
+            </div>
+            <div className="font-mono text-sm tracking-widest whitespace-nowrap invisible">
+              lkdljfs
             </div>
           </div>
         )}
