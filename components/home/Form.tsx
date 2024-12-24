@@ -1,13 +1,19 @@
+import Select from "./Select";
+
 export function Form({
   sequence1,
   sequence2,
   handleSequence1Change,
   handleSequence2Change,
+  algorithm,
+  setAlgorithm,
 }: {
   sequence1: string;
   sequence2: string;
   handleSequence1Change: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSequence2Change: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  algorithm: string;
+  setAlgorithm: React.Dispatch<React.SetStateAction<string>>;
 }) {
   return (
     <div>
@@ -53,6 +59,8 @@ export function Form({
             />
           </div>
         </div>
+
+        <Select algorithm={algorithm} setAlgorithm={setAlgorithm} />
 
         <div className="hidden">
           <button

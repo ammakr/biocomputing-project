@@ -9,6 +9,7 @@ import Content from "./home/Content";
 export default function HomeScreen() {
   const [sequence1, setSequence1] = useState("");
   const [sequence2, setSequence2] = useState("");
+  const [algorithm, setAlgorithm] = useState("needleman-wunsch");
 
   const handleSequence1Change = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSequence1(e.target.value.toUpperCase());
@@ -39,9 +40,9 @@ export default function HomeScreen() {
                 height={200}
                 alt="QAU Logo"
                 src="/logo.png"
-                className="h-24 w-auto"
+                className="h-16 w-auto"
               />
-              <h1 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
+              <h1 className="mt-8 text-2xl font-semibold leading-9 tracking-tight text-gray-900">
                 DNA Sequence Alignment
               </h1>
               <p className="mt-2 text-sm leading-6 text-gray-500">
@@ -61,11 +62,14 @@ export default function HomeScreen() {
                 sequence2={sequence2}
                 handleSequence1Change={handleSequence1Change}
                 handleSequence2Change={handleSequence2Change}
+                algorithm={algorithm}
+                setAlgorithm={setAlgorithm}
               />
               <Result
                 seq1={sequence1}
                 seq2={sequence2}
                 similarity={calculateSimilarity()}
+                algorithm={algorithm}
               />
             </div>
           </div>

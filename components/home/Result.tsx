@@ -1,23 +1,31 @@
 import needleman from "@/lib/needleman";
+import smithwaterman from "@/lib/smithwaterman";
 import { useEffect, useState } from "react";
 
 export function Result({
   seq1,
   seq2,
   similarity,
+  algorithm,
 }: {
   seq1: string;
   seq2: string;
   similarity: number;
+  algorithm: string;
 }) {
   const [alignment, setAlignment] = useState<any>(null);
 
   useEffect(() => {
     if (seq1 && seq2) {
-      const result = needleman(seq1, seq2);
-      setAlignment(result);
+      if (algorithm === "smith-waterman") {
+        const result = smithwaterman(seq1, seq2);
+        setAlignment(result);
+      } else {
+        const result = needleman(seq1, seq2);
+        setAlignment(result);
+      }
     }
-  }, [seq1, seq2]);
+  }, [seq1, seq2, algorithm]);
 
   const highlightAlignment = (seq1: string, seq2: string) => {
     return seq1.split("").map((char, index) => {
@@ -43,8 +51,8 @@ export function Result({
     });
   };
   return (
-    <div className="mt-10">
-      <div className="relative">
+    <div className="mt-4">
+      {/* <div className="relative">
         <div aria-hidden="true" className="absolute inset-0 flex items-center">
           <div className="w-full border-t border-gray-200" />
         </div>
@@ -53,13 +61,14 @@ export function Result({
             {similarity ? similarity : 0}% match
           </span>
         </div>
-      </div>
+      </div> */}
 
-      <div className="mt-6 grid grid-cols-2 gap-4">
+      <div className="mt-4 grid grid-cols-2 gap-4">
         {alignment && seq1.length > 0 && seq2.length > 0 ? (
           <div style={{ marginTop: "2px" }}>
-            <h2 className="py-4 text-sm font-light tracking-wider uppercase">
-              Aligned Sequences
+            <h2 className="py-4 text-sm font-light tracking-wider uppercase whitespace-nowrap">
+              Aligned Sequences ({similarity ? similarity.toFixed(2) : 0}%
+              match)
             </h2>
             <div className="font-mono text-sm tracking-widest whitespace-nowrap">
               {highlightAlignment(alignment.alignedSeq1, alignment.alignedSeq2)}
